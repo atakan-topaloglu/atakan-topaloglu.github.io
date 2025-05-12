@@ -110,7 +110,7 @@ layout: null
         <div class="columns">
           <div class="column is-four-fifths">
             <a href="{{ publication.project_page }}"><b>{{ publication.title }}</b></a>
-            <div class="publication-authors">
+            <div class="publicatlion-authors">
               {% for author_id in publication.authors %}
               {% assign author = site.data.authors[author_id] %}
               <span class="author-block {% if author.is_me %}author-me{% endif %}">
@@ -131,6 +131,21 @@ layout: null
           </div>
         </div>
         {% endfor %}
+      </div>
+    </div>
+  </section>
+  <div class="hr">
+    <div class="container">
+      <hr>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="content has-text-centered">
+        <a href="books.html" class="button is-light">
+          <span>Some books I've enjoyed</span>
+        </a>
       </div>
     </div>
   </section>

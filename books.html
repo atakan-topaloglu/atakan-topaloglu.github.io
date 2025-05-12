@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="My Book Collection">
+
+    <title>My Books</title>
+
+    <!-- Pure CSS -->
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+
+    <!-- Font Awesome (Included in original, keeping for similarity) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- Google Font: Raleway (Included in original, keeping for similarity) -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Raleway:200">
+
+    <!-- Normalize CSS (Included in original via Codepen, adding as direct link for stability) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <style>
+        /* General Typography based on original */
+        html, button, input, select, textarea,
+        .pure-g [class *= "pure-u"] {
+            font-weight: 300;
+            font-family: 'Helvetica Neue', 'Source Sans Pro', 'Open Sans', Helvetica, Arial, sans-serif;
+            font-size: 15px;
+            line-height: 1.4em;
+        }
+
+        h2 {
+            font-weight: 300;
+            line-height: 1.2em;
+            margin-top: 0.5em; /* Adjusted for spacing */
+            margin-bottom: 1em; /* Adjusted for spacing */
+        }
+
+        p {
+            margin: 1em 0 1em;
+        }
+
+        /* Book Specific Styling (Copied directly from original) */
+        .book, .book img, .book::after,
+        .book::before {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        body {
+            background: #fde3a7; /* Keeping original background */
+            text-align: center;
+            margin-left: 1em;
+            margin-right: 1em;
+            padding-top: 20px; /* Add some padding at the top */
+        }
+
+        ul {
+             /* Original had table-cell, changing to block and using flexbox for centering */
+             /* display: table-cell;
+             vertical-align: middle; */
+             display: flex;
+             flex-wrap: wrap; /* Allow items to wrap to the next line */
+             justify-content: center; /* Center items horizontally */
+             padding: 0; /* Remove default ul padding */
+             list-style: none; /* Remove list bullets */
+        }
+
+        .list-inline > li {
+            /* Keep display inline-block but add margin for spacing */
+            display: inline-block; /* Preserve for list-inline class */
+            margin: 0.5em; /* Added margin around each book item */
+            vertical-align: top; /* Align items nicely in grid */
+        }
+
+         .list-inline > li:first-child {
+            /* Remove the specific first-child margin rule as general margin is added */
+            margin-left: 0.5em; /* Keep consistent margin */
+        }
+
+        .book {
+            cursor: pointer;
+            display: block; /* Ensure block behavior */
+            width: 150px; /* Match original book size */
+            height: 220px; /* Match original book size */
+            position: relative;
+            background: white;
+            z-index: 1;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 9px 20px 0 rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            -webkit-transition: box-shadow .3s linear;
+            transition: box-shadow .3s linear;
+        }
+
+        /* Link styling - often reset by Normalize or Pure */
+        a {
+            text-decoration: none; /* Remove underline from links */
+            color: inherit; /* Inherit color from parent */
+            display: block; /* Make the entire book div clickable */
+            width: 100%;
+            height: 100%;
+        }
+
+        .book img {
+            width: 150px;
+            height: 220px;
+            display: block; /* Prevent extra space below image */
+            -webkit-transform-origin: 0 50%;
+            transform-origin: 0 50%;
+            -webkit-transform: rotateY(0);
+            transform: rotateY(0);
+            -webkit-transition: all .45s ease;
+            transition: all .45s ease;
+        }
+
+        .book:hover {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25), 0 9px 20px 0 rgba(0, 0, 0, 0.45);
+        }
+        .book:hover img {
+            -webkit-transform: rotateY(-25deg);
+            transform: rotateY(-25deg);
+            box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .book::after,
+        .book::before {
+            content: '';
+            display: block;
+            width: inherit;
+            height: inherit;
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            background: white;
+            border: 1px solid #d9d9d9;
+        }
+
+        .book::before {
+            left: -3px;
+        }
+
+        .book::after {
+            left: -6px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="main">
+    <!-- Optional Header - Uncomment and customize if needed -->
+    <!-- <div class="header">
+        <div class="l-box">
+            <h1><a href="#">Your Name</a></h1>
+        </div>
+    </div> -->
+
+    <div class="pure-g">
+        <div class="pure-u-1">
+            <h2>Here are some books I've read and enjoyed:</h2>
+
+            <ul class="list-inline">
+
+                <!-- Book Entries -->
+                <!-- Remember to replace href="#" with the actual link and src="..." with the actual cover image URL -->
+
+                <li class="book">
+                    <a href="#" title="Other Minds">
+                        <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1606353700i/28116739.jpg">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Idea Factory: Bell Labs">
+                        <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1338504885i/11797471.jpg">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Feminine Mystique">
+                        <img src="https://m.media-amazon.com/images/I/41aYsRhNqsL._SY445_SX342_.jpg">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="In a Different Voice: Gillighan">
+                        <img src="https://m.media-amazon.com/images/I/517eBcMAe8L._SL1000_.jpg" alt="Cover for In a Different Voice: Gillighan">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="All Quiet on the Western Front">
+                        <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1667947773i/894862.jpg" alt="Cover for All Quiet on the Western Front">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="A Room of One's Own">
+                        <img src="https://en.wikipedia.org/wiki/A_Room_of_One%27s_Own#/media/File:ARoomOfOnesOwn.jpg" alt="Cover for A Room of One's Own">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Man's Search for Meaning">
+                        <img src="https://m.media-amazon.com/images/I/5112lDRbMXL._SL1200_.jpg" alt="Cover for Man's Search for Meaning">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Thinking in Systems: A Primer">
+                        <img src="https://images.thalia.media/00/-/5535ae9ce4584d96a1b372ed6c2c456f/thinking-in-systems-taschenbuch-donella-meadows-englisch.jpeg" alt="Cover for Thinking in Systems: A Primer">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Naked Statistics">
+                        <img src="https://images.thalia.media/00/-/8d4bdf1937a64ce3aea98707a2990c21/naked-statistics-taschenbuch-charles-wheelan-englisch.jpeg" alt="Cover for Naked Statistics">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Hitchhiker's Guide to the Galaxy">
+                        <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1404613595i/13.jpg" alt="Cover for Hitchhiker's Guide to the Galaxy">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Surely You're Joking, Mr. Feynman!">
+                        <img src="https://en.wikipedia.org/wiki/Surely_You%27re_Joking,_Mr._Feynman!#/media/File:SurelyYoureJokingMrFeynman.PNG" alt="Cover for Surely You're Joking, Mr. Feynman!">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Profit Over People (Chomsky)">
+                        <img src="https://images.thalia.media/00/-/b7d57d780e9a47d3bf5e6453d8c59938/profit-over-people-neoliberalism-and-global-order-taschenbuch-noam-chomsky-englisch.jpeg" alt="Cover for Profit Over People (Chomsky)">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Globalization and Its Discontents">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/7/7b/Globalization_and_Its_Discontents.jpg" alt="Cover for Globalization and Its Discontents">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="The Burnout Society">
+                        <img src="https://www.sup.org/_next/image?url=https%3A%2F%2Fsupress.sites-pro.stanford.edu%2Fsites%2Fsupress%2Ffiles%2Fmedia%2Fcovers%2F25725.jpg&w=640&q=75" alt="Cover for The Burnout Society">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Against Method">
+                        <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1373999202i/137979.jpg" alt="Cover for Against Method">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Theory and Reality - Peter Godfrey Smith">
+                        <img src="https://m.media-amazon.com/images/I/513E1JrU31L.jpg" alt="Cover for Theory and Reality - Peter Godfrey Smith">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Why Nations Fail">
+                        <img src="https://images.thalia.media/00/-/8eba5bc02af4408882c3faef41778a51/why-nations-fail-taschenbuch-daron-acemoglu-englisch.jpeg" alt="Cover for Why Nations Fail">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="The Plague - Camus">
+                        <img src="https://m.media-amazon.com/images/I/91tAD60x9YL._SY466_.jpg" alt="Cover for The Plague - Camus">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="The Glass Castle">
+                        <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1523542886i/7445.jpg" alt="Cover for The Glass Castle">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Crime and Punishment">
+                        <img src="https://images.thalia.media/00/-/49a4c36969f749a0a43b83b757a3a645/crime-and-punishment-taschenbuch-fyodor-dostoyevsky-englisch.jpeg" alt="Cover for Crime and Punishment">
+                    </a>
+                </li>
+
+                 <li class="book">
+                    <a href="#" title="Tante Rosa">
+                        <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1592824016i/2042018.jpg" alt="Cover for Tante Rosa">
+                    </a>
+                </li>
+
+                 <li class="book">
+                    <a href="#" title="The Dispossessed">
+                        <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1353467455i/13651.jpg" alt="Cover for The Dispossessed">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Yitip Giden İstanbul">
+                        <img src="https://m.media-amazon.com/images/I/71Ll3yNmW2L._SL1500_.jpg" alt="Cover for Yitip Giden İstanbul">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="The Rise and Fall of the Zulu Nation">
+                        <img src="https://m.media-amazon.com/images/I/51VDG96EH4L._SY445_SX342_.jpg" alt="Cover for The Rise and Fall of the Zulu Nation">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Story of Art">
+                        <img src="https://en.wikipedia.org/wiki/The_Story_of_Art#/media/File:TheStoryOfArt.jpg" alt="Cover for Ernst Gombrich Story of Art">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Ways of Seeing">
+                        <img src="https://images.thalia.media/00/-/90e8a2470136444083af27d42be299b8/ways-of-seeing-taschenbuch-john-berger-englisch.jpeg" alt="Cover for Ways of Seeing">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Chronicle of a Death Foretold">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/5/50/ChronicleOfADeathForetold.JPG" alt="Cover for Chronicle of a Death Foretold">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="The First Moderns">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/7/71/The_First_Moderns.jpg" alt="Cover for İlk modernler">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="The Origin of Consciousness in the Breakdown of the Bicameral Mind">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/4/4d/JaynesOriginOfConsciousness.jpg" alt="Cover for The Origin of Consciousness in the Breakdown of the Bicameral Mind">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="From Bakunin to Lacan">
+                        <img src="https://m.media-amazon.com/images/I/61QPK9tV-yL._SY466_.jpg" alt="Cover for From Bakunin to Lacan">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Steppenwolf">
+                        <img src="https://images.thalia.media/00/-/6d08075c57cf42b6a6b52b36c07d5809/der-steppenwolf-taschenbuch-hermann-hesse.jpeg" alt="Cover for Steppenwolf">
+                    </a>
+                </li>
+
+                <li class="book">
+                    <a href="#" title="Klingsor's Last Summer">
+                        <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1356492663i/17167281.jpg" alt="Cover for Klingsor's Last Summer">
+                    </a>
+                </li>
+
+                 <li class="book">
+                    <a href="#" title="The Years">
+                        <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1682913153i/145625252.jpg" alt="Cover for The Years">
+                    </a>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
