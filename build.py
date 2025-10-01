@@ -164,14 +164,14 @@ def get_project_data():
         },
         {
            'title': '3D Gaussian Splatting from Smartphone Cameras',
-            'description': 'We found that aggressive downsampling and color palette quantization of input images had minimal effect on Gaussian Splatting quality in indoor scenes. Leveraging this insight, we redesigned the data pipeline to apply these steps after structure-from-motion (SfM), reducing memory consumption by 83%. In addition, a lightweight interface was developed to make the pipeline accessible for everyday captures from smartphone cameras, lowering the barrier for SMEs and non-expert users to generate their own splats. The final model was reconstructed from 729 images, totaling 122 MB.',
+            'description': 'We found that aggressive downsampling and color palette quantization of input images had minimal effect on Gaussian Splatting quality in indoor scenes. Leveraging this insight, we redesigned the data pipeline to apply these steps after structure-from-motion (SfM), reducing memory consumption by 83%. In addition, a lightweight interface was developed to make the pipeline accessible for everyday captures from smartphone cameras, lowering the barrier for SMEs and non-expert users to generate their own splats. The final model was reconstructed with maximum GPU VRAM utilization of 3.9 GB from 729 images, occupying 122 MB on disk.',
             'img_src': 'assets/img/project/3dgs_compress_smartphone.png',
             'video_url': '', 
             'is_private': True,
         },
         {
             'title': 'Building Information Modelling (BIM) PoC on CPU',
-            'description': 'Developed a proof-of-concept for a Building Information Modeling viewer designed to run efficiently on consumer-grade hardware. This demonstration runs smoothly on an Intel I5 (4 cores, 8 GB RAM, 2.8 GHz) with no dedicated GPU.',
+            'description': 'Developed a proof-of-concept for a Building Information Modeling viewer designed to run efficiently on consumer-grade hardware. This demonstration runs smoothly on an 8th GenIntel i5 CPU (4 cores, 8 GB RAM, 2.8 GHz) with no dedicated GPU.',
             'img_src': 'assets/img/project/3dgs_bim.png',
             'video_url': '', 
             'is_private': True,
