@@ -63,7 +63,7 @@ def generate_person_html(persons, connection=", ", make_bold=True, make_bold_nam
     return s
 
 def get_paper_entry(entry_key, entry):
-    s = """<div style="margin-bottom: 3em;"> <div class="row"><div class="col-sm-3">"""
+    s = """<div style="margin-bottom: 1.5em;"> <div class="row"><div class="col-sm-3">"""
     
     # Determine the link for the image based on priority: html -> video -> pdf
     image_link = None
@@ -82,9 +82,9 @@ def get_paper_entry(entry_key, entry):
     s += """</div><div class="col-sm-9">"""
 
     if 'award' in entry.fields.keys():
-        s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <span style="color: red;">({entry.fields['award']})</span><br>"""
+        s += f"""<b><a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <span style="color: red;">({entry.fields['award']})</span></b><br>"""
     else:
-        s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <br>"""
+        s += f"""<b><a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a></b> <br>"""
 
     s += f"""{generate_person_html(entry.persons['author'])} <br>"""
     s += f"""<span style="font-style: italic;">{entry.fields['booktitle']}</span>, {entry.fields['year']} <br>"""
@@ -110,7 +110,7 @@ def get_paper_entry(entry_key, entry):
     return s
 
 def get_talk_entry(entry_key, entry):
-    s = """<div style="margin-bottom: 3em;"> <div class="row"><div class="col-sm-3">"""
+    s = """<div style="margin-bottom: 1.5em;"> <div class="row"><div class="col-sm-3">"""
     s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image">"""
     s += """</div><div class="col-sm-9">"""
     s += f"""{entry.fields['title']}<br>"""
@@ -179,7 +179,7 @@ def get_project_data():
     ]
 
 def get_project_entry(project):
-    s = """<div style="margin-bottom: 3em;"> <div class="row"><div class="col-sm-3">"""
+    s = """<div style="margin-bottom: 1.5em;"> <div class="row"><div class="col-sm-3">"""
     
     # Determine the link for the thumbnail: public videos or websites only
     thumbnail_link = project.get('website_url')
@@ -251,7 +251,7 @@ def get_index_html():
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-                <div class="row" style="margin-top: 3em;">
+                <div class="row" style="margin-top: 1.5em;">
                     <div class="col-sm-12" style="margin-bottom: 1em;">
                     <h3 class="display-4" style="text-align: center;"><span style="font-weight: bold;">{name[0]}</span> {name[1]}</h3>
                     </div>
@@ -264,7 +264,7 @@ def get_index_html():
                     </div>
                 </div>
                 
-                <hr style="border: none; border-top: 1px solid #eaeaea; margin: 2em 0 2em 0; opacity: 0.3;">
+                <hr style="border: none; border-top: 1px solid #eaeaea; margin: 1em 0; opacity: 0.3;">
 
                 <div class="row" style="margin-top: 1em;">
                     <div class="col-sm-12" style="">
@@ -274,8 +274,8 @@ def get_index_html():
                 </div>"""
     if projects:
         s += f"""
-                <hr style="border: none; border-top: 1px solid #eaeaea; margin: 2em 0 2em 0; opacity: 0.3;">
-                 <div class="row" style="margin-top: 3em;">
+                <hr style="border: none; border-top: 1px solid #eaeaea; margin: 1em 0; opacity: 0.3;">
+                 <div class="row" style="margin-top: 1.5em;">
                      <div class="col-sm-12" style="">
                      <h4>💻 Projects</h4>
                         {projects}
@@ -283,8 +283,8 @@ def get_index_html():
                 </div>"""
     if talks:
         s += f"""
-                <hr style="border: none; border-top: 1px solid #eaeaea; margin: 2em 0 2em 0; opacity: 0.3;">
-                 <div class="row" style="margin-top: 3em;">
+                <hr style="border: none; border-top: 1px solid #eaeaea; margin: 1em 0; opacity: 0.3;">
+                 <div class="row" style="margin-top: 1.5em;">
                      <div class="col-sm-12" style="">
                        <h4>🎤 Talks & Presentations</h4>
                          {talks}
@@ -293,7 +293,7 @@ def get_index_html():
     s += f"""
                     </div>
                 </div>
-                <hr style="border: none; border-top: 1px solid #eaeaea; margin: 2em 0 2em 0; opacity: 0.3;">
+                <hr style="border: none; border-top: 1px solid #eaeaea; margin: 1em 0; opacity: 0.3;">
                 <div class="row" style="margin-top: 1em;">
                     <div class="col-sm-12" style="">
                     <div style="background: #f0f0f0; border-radius: 8px; padding: 1em 1em 1em 1em; margin-top: 2em; margin-bottom: 1em; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: center;">
