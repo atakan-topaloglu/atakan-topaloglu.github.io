@@ -170,8 +170,8 @@ def get_project_data():
             'is_private': True,
         },
         {
-            'title': 'Building Information Modelling (BIM) PoC on Integrated GPU',
-            'description': 'Developed a proof-of-concept for a Building Information Modeling viewer designed to run efficiently on consumer-grade hardware. This demonstration runs smoothly on an Intel i5 desktop with no dedicated GPU.',
+            'title': 'Building Information Modelling (BIM) PoC on CPU',
+            'description': 'Developed a proof-of-concept for a Building Information Modeling viewer designed to run efficiently on consumer-grade hardware. This demonstration runs smoothly on an Intel I5 (4 cores, 8 GB RAM, 2.8 GHz) with no dedicated GPU.',
             'img_src': 'assets/img/project/3dgs_bim.png',
             'video_url': '', 
             'is_private': True,
