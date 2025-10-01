@@ -157,7 +157,7 @@ def get_project_data():
         {
             'title': '3D Semantic Segmentation with SAMv2 Memory Bank',
             'description': """
-               We noticed that GaGa repeatedly labeled the same objects when revisiting regions, especially textureless regions, such as walls, failing to maintain consistency across views. To address this, we leveraged the existing SAMv2 memory bank and used our dense images and pose-based image warping combined with IoU matching to project previous masks onto new viewpoints. This simple approach enforced mask consistency in indoor scenes with "loop closure", reducing duplicate labeling especially in textureless regions.
+               We noticed that <a href="https://github.com/weijielyu/Gaga" target="_blank">Gaga</a> by Lyu et al. repeatedly labeled the same objects when revisiting regions, especially textureless regions, such as walls, failing to maintain consistency across views. To address this, we leveraged the existing SAMv2 memory bank and used our dense images and pose-based image warping combined with IoU matching to project previous masks onto new viewpoints. This simple approach enforced mask consistency in indoor scenes with "loop closure", reducing duplicate labeling especially in textureless regions.
             """,
             'img_src': 'assets/img/project/3dgs_gaga.png',
             'video_url': '', # nice try!
