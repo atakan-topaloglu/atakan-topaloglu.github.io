@@ -264,6 +264,8 @@ def get_index_html():
                     </div>
                 </div>
                 
+                <hr style="border: none; border-top: 1px solid #eaeaea; margin: 2em 0 2em 0; opacity: 0.3;">
+
                 <div class="row" style="margin-top: 1em;">
                     <div class="col-sm-12" style="">
                         <h4>📚 Publications</h4>
@@ -272,6 +274,7 @@ def get_index_html():
                 </div>"""
     if projects:
         s += f"""
+                <hr style="border: none; border-top: 1px solid #eaeaea; margin: 2em 0 2em 0; opacity: 0.3;">
                  <div class="row" style="margin-top: 3em;">
                      <div class="col-sm-12" style="">
                      <h4>💻 Projects</h4>
@@ -280,6 +283,7 @@ def get_index_html():
                 </div>"""
     if talks:
         s += f"""
+                <hr style="border: none; border-top: 1px solid #eaeaea; margin: 2em 0 2em 0; opacity: 0.3;">
                  <div class="row" style="margin-top: 3em;">
                      <div class="col-sm-12" style="">
                        <h4>🎤 Talks & Presentations</h4>
@@ -289,6 +293,7 @@ def get_index_html():
     s += f"""
                     </div>
                 </div>
+                <hr style="border: none; border-top: 1px solid #eaeaea; margin: 2em 0 2em 0; opacity: 0.3;">
                 <div class="row" style="margin-top: 1em;">
                     <div class="col-sm-12" style="">
                     <div style="background: #f0f0f0; border-radius: 8px; padding: 1em 1em 1em 1em; margin-top: 2em; margin-bottom: 1em; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: center;">
@@ -301,7 +306,7 @@ def get_index_html():
                 </div>
             </div>
             <div class="col-md-1"></div>
-        </div?
+        </div>
     </div>
 
     <!-- Optional JavaScript -->
