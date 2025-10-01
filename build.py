@@ -300,7 +300,7 @@ def get_index_html():
                     <div class="col-sm-12" style="">
                     <div style="background: #f0f0f0; border-radius: 8px; padding: 1em 1em 1em 1em; margin-top: 2em; margin-bottom: 1em; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: center;">
                         <span style="font-size: 1.1em; color: #505050;">
-                            The overall design is inspired by 
+                            The overall design is inspired by and built upon
                             <a href="https://m-niemeyer.github.io/" target="_blank" style="font-weight: bold; color: #007bff; text-decoration: underline;">Michael Niemeyer's cool website</a>.
                         </span>
                     </div>
