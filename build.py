@@ -79,12 +79,12 @@ def generate_person_html(persons, connection=", ", make_bold=True, make_bold_nam
 def get_paper_entry(entry_key, entry):
     s = """<div style="margin-bottom: 1.5em;"> <div class="row"><div class="col-12 col-sm-3 text-center">"""
     
-    # Determine the link for the image based on priority: html -> video -> pdf
+    # Determine the link for the image based on priority: video --> html -> pdf
     image_link = None
-    if 'html' in entry.fields.keys():
-        image_link = entry.fields['html']
-    elif 'video' in entry.fields.keys():
+    if 'video' in entry.fields.keys():
         image_link = entry.fields['video']
+    elif 'html' in entry.fields.keys():
+        image_link = entry.fields['html']
     elif 'pdf' in entry.fields.keys():
         image_link = entry.fields['pdf']
     
