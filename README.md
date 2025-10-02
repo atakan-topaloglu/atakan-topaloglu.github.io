@@ -1,18 +1,15 @@
-# Readme.md
+# Welcome to My Homepage
 
 This repository contains the Python script to generate [my homepage](https://atakan-topaloglu.github.io/).
 
 The overall design and initial script structure are built upon the excellent template provided by [Michael Niemeyer](https://m-niemeyer.github.io/). This setup is designed to be easy to adapt and maintain, as publications and projects are automatically crawled from BibTeX files.
 
-## Atakan Topaloğlu's Contributions
-
 I have extended Michael Niemeyer's original script with the following features:
 
-1.  **Dedicated Projects Section:** Projects are now managed in a separate file (`projects.bib`) and automatically rendered on the homepage.
-2.  **Equal Contribution Support:** Added support for marking equal contribution co-authors using the `equal_contribution` field in the BibTeX entry.
-3.  **Image Linkage:** Clicking on publication/project thumbnail images now automatically directs the user to the associated project page, video, or PDF (based on availability priority).
-4.  **Mobile Layout Optimizations:**
- On mobile screens, the profile image is moved to appear immediately below the name/title, before the bio text. Profile picture, publication and project thumbnails are centered and constrained in size for better viewing on small screens. Optionally added name pronunciation guide below the main title.
+1. On mobile screens, the profile image is moved to appear immediately below the name/title, before the bio text. Profile picture, publication and project thumbnails are centered and constrained in size for better viewing on small screens. Optionally added name pronunciation guide below the name.
+2.  Added support for marking equal contribution co-authors using the `equal_contribution` field in the BibTeX entry.
+3. Clicking on publication/project thumbnail images now automatically directs the user to the associated project page, video, or PDF (based on availability priority).
+4. Projects are now managed in a separate file (`projects.bib`) and automatically rendered on the homepage.
 
 ## How to use it
 
