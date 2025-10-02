@@ -1,4 +1,4 @@
-# Welcome to My Homepage
+# Welcome!
 
 This repository contains the Python script to generate [my homepage](https://atakan-topaloglu.github.io/).
 
