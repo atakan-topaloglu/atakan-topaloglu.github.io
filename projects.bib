@@ -1,6 +1,6 @@
-@misc{3dgs_samv2,
-    title = {3D Semantic Segmentation with SAMv2 Memory Bank},
-    description = {We noticed that Gaga by Lyu et al. repeatedly labeled the same objects when revisiting regions, especially textureless regions, such as walls, failing to maintain consistency across views. To address this, we leveraged the existing SAMv2 memory bank and used our dense images and pose-based image warping combined with IoU matching to project previous masks onto new viewpoints. This simple approach enforced mask consistency in indoor scenes with "loop closure", reducing duplicate labeling especially in textureless regions.},
+@misc{3dgs_sam2,
+    title = {3D Semantic Segmentation with SAM2 Memory Bank},
+    description = {We noticed that <a href="https://github.com/weijielyu/Gaga" target="_blank">GaGa</a> (Lyu et al.) repeatedly labeled the same objects when revisiting regions, especially textureless regions, such as walls, failing to maintain consistency across views. To address this, we leveraged the existing SAM2 memory bank and used our dense images and pose-based image warping combined with IoU matching to project previous masks onto new viewpoints. This simple approach enforced mask consistency in indoor scenes with "loop closure", reducing duplicate labeling especially in textureless regions.},
     img = {assets/img/project/3dgs_gaga.png},
     private = {true},
     video = {}, 
@@ -8,7 +8,7 @@
 
 @misc{3dgs_compression,
     title = {3D Gaussian Splatting from Smartphone Cameras},
-    description = {We found that aggressive downsampling and color palette quantization of input images had minimal effect on Gaussian Splatting quality in indoor scenes. Leveraging this insight, we redesigned the data pipeline to apply these steps after structure-from-motion (SfM), reducing memory consumption by 83%. [...]},
+    description = {We found that aggressive downsampling and color palette quantization of input images had minimal effect on Gaussian Splatting quality in indoor scenes. Leveraging this insight, we redesigned the data pipeline to apply these steps after structure-from-motion (SfM), reducing memory consumption by 83%. In addition, a lightweight interface was developed to make the pipeline accessible for everyday captures from smartphone cameras, lowering the barrier for SMEs and non-expert users to generate their own splats. The final model was reconstructed with maximum GPU VRAM utilization of 3.9 GB from 729 images, occupying 122 MB on disk.},
     img = {assets/img/project/3dgs_compress_smartphone.png},
     private = {true},
     video = {},

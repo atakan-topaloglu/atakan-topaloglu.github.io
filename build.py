@@ -1,5 +1,6 @@
 from pybtex.database.input import bibtex
 import urllib.parse
+import os
 
 def get_personal_data():
     name = ["Atakan", "Topaloğlu"]
@@ -166,6 +167,8 @@ def get_publications_html():
 
 def get_talks_html():
     parser = bibtex.Parser()
+    if not os.path.exists('talk_list.bib'):
+        return ""
     bib_data = parser.parse_file('talk_list.bib')
 
     if len(bib_data.entries) == 0:
