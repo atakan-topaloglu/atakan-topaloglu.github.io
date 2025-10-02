@@ -177,75 +177,67 @@ def get_talks_html():
         s+= get_talk_entry(k, bib_data.entries[k])
     return s
 
-def get_project_data():
-    return [
-        {
-            'title': '3D Semantic Segmentation with SAMv2 Memory Bank',
-            'description': """
-               We noticed that <a href="https://github.com/weijielyu/Gaga" target="_blank">Gaga</a> by Lyu et al. repeatedly labeled the same objects when revisiting regions, especially textureless regions, such as walls, failing to maintain consistency across views. To address this, we leveraged the existing SAMv2 memory bank and used our dense images and pose-based image warping combined with IoU matching to project previous masks onto new viewpoints. This simple approach enforced mask consistency in indoor scenes with "loop closure", reducing duplicate labeling especially in textureless regions.
-            """,
-            'img_src': 'assets/img/project/3dgs_gaga.png',
-            'video_url': '', # nice try!
-            'is_private': True,
-        },
-        {
-           'title': '3D Gaussian Splatting from Smartphone Cameras',
-            'description': 'We found that aggressive downsampling and color palette quantization of input images had minimal effect on Gaussian Splatting quality in indoor scenes. Leveraging this insight, we redesigned the data pipeline to apply these steps after structure-from-motion (SfM), reducing memory consumption by 83%. In addition, a lightweight interface was developed to make the pipeline accessible for everyday captures from smartphone cameras, lowering the barrier for SMEs and non-expert users to generate their own splats. The final model was reconstructed with maximum GPU VRAM utilization of 3.9 GB from 729 images, occupying 122 MB on disk.',
-            'img_src': 'assets/img/project/3dgs_compress_smartphone.png',
-            'video_url': '', 
-            'is_private': True,
-        },
-        {
-            'title': 'Building Information Modelling (BIM) PoC on CPU',
-            'description': 'Developed a proof-of-concept for a Building Information Modeling viewer designed to run efficiently on consumer-grade hardware. This demonstration runs smoothly on an 8th GenIntel i5 CPU (4 cores, 8 GB RAM, 2.8 GHz) with no dedicated GPU.',
-            'img_src': 'assets/img/project/3dgs_bim.png',
-            'video_url': '', 
-            'is_private': True,
-        }
-    ]
+# --- Project handling modified to use projects.bib ---
 
-def get_project_entry(project):
+def get_project_entry(entry_key, entry):
     s = """<div style="margin-bottom: 1.5em;"> <div class="row"><div class="col-sm-3">"""
     
+    # Map fields from BibTeX entry
+    title = entry.fields.get('title', 'Untitled Project')
+    # Assuming 'description' is a custom field in projects.bib for project summary
+    description = entry.fields.get('description', 'No description provided.')
+    img_src = entry.fields.get('img', 'assets/img/default.png') 
+    video_url = entry.fields.get('video')
+    website_url = entry.fields.get('html')
+    # Check if the project is marked as private (e.g., private={1} or private={true})
+    is_private = entry.fields.get('private', '').lower() in ['true', '1']
+
     # Determine the link for the thumbnail: public videos or websites only
-    thumbnail_link = project.get('website_url')
-    if not project.get('is_private'):
-        thumbnail_link = thumbnail_link or project.get('video_url')
+    thumbnail_link = website_url
+    if not is_private:
+        thumbnail_link = thumbnail_link or video_url
     
     if thumbnail_link:
-        s += f"""<a href="{thumbnail_link}" target="_blank"><img src="{project['img_src']}" class="img-fluid img-thumbnail" alt="Project image"></a>"""
+        s += f"""<a href="{thumbnail_link}" target="_blank"><img src="{img_src}" class="img-fluid img-thumbnail" alt="Project image"></a>"""
     else:
-        s += f"""<img src="{project['img_src']}" class="img-fluid img-thumbnail" alt="Project image">"""
+        s += f"""<img src="{img_src}" class="img-fluid img-thumbnail" alt="Project image">"""
 
     s += """</div><div class="col-sm-9">"""
-    s += f"""<p style="font-weight: bold; margin-bottom: 0.5em;">{project['title']}</p>"""
-    s += f"""<div>{project['description']}</div>"""
+    s += f"""<p style="font-weight: bold; margin-bottom: 0.5em;">{title}</p>"""
+    s += f"""<div>{description}</div>"""
     
-# Generate links, handling private videos
+    # Generate links, handling private videos
     links = []
-    if project.get('is_private'):
-        _, personal_data, _ = get_personal_data()
+    if is_private:
         links.append(f'<a href="https://forms.gle/ZJ55t5bhZ2yUvYeB8">Request Access via Form</a>')
-    elif 'video_url' in project:
-        links.append(f'<a href="{project["video_url"]}" target="_blank">Video</a>')
+    elif video_url:
+        links.append(f'<a href="{video_url}" target="_blank">Video</a>')
 
-    if project.get('website_url'):
-        links.append(f'<a href="{project["website_url"]}" target="_blank">Project Page</a>')
+    if website_url:
+        links.append(f'<a href="{website_url}" target="_blank">Project Page</a>')
 
-    s += ' / '.join(links)
+    if links:
+        s += '<p style="margin-top: 0.5em;">' + ' / '.join(links) + '</p>'
     
     s += """ </div> </div> </div>"""
     return s
 
 
 def get_projects_html():
-    project_data = get_project_data()
-    if not project_data:
+    parser = bibtex.Parser()
+    try:
+        bib_data = parser.parse_file('projects.bib')
+    except FileNotFoundError:
+        print("Warning: projects.bib not found. Skipping projects section.")
+        return ""
+
+    if len(bib_data.entries) == 0:
         return ""
     
+    keys = bib_data.entries.keys()
     s = ""
-    for project in project_data:
-        s += get_project_entry(project)
+    for k in keys:
+        s += get_project_entry(k, bib_data.entries[k])
     return s
 
 

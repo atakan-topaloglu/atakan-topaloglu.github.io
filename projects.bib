@@ -1,0 +1,23 @@
+@misc{3dgs_samv2,
+    title = {3D Semantic Segmentation with SAMv2 Memory Bank},
+    description = {We noticed that Gaga by Lyu et al. repeatedly labeled the same objects when revisiting regions, especially textureless regions, such as walls, failing to maintain consistency across views. To address this, we leveraged the existing SAMv2 memory bank and used our dense images and pose-based image warping combined with IoU matching to project previous masks onto new viewpoints. This simple approach enforced mask consistency in indoor scenes with "loop closure", reducing duplicate labeling especially in textureless regions.},
+    img = {assets/img/project/3dgs_gaga.png},
+    private = {true},
+    video = {}, 
+}
+
+@misc{3dgs_compression,
+    title = {3D Gaussian Splatting from Smartphone Cameras},
+    description = {We found that aggressive downsampling and color palette quantization of input images had minimal effect on Gaussian Splatting quality in indoor scenes. Leveraging this insight, we redesigned the data pipeline to apply these steps after structure-from-motion (SfM), reducing memory consumption by 83%. [...]},
+    img = {assets/img/project/3dgs_compress_smartphone.png},
+    private = {true},
+    video = {},
+}
+
+@misc{bim_poc,
+    title = {Building Information Modelling (BIM) PoC on CPU},
+    description = {Developed a proof-of-concept for a Building Information Modeling viewer designed to run efficiently on consumer-grade hardware. This demonstration runs smoothly on an 8th GenIntel i5 CPU (4 cores, 8 GB RAM, 2.8 GHz) with no dedicated GPU.},
+    img = {assets/img/project/3dgs_bim.png},
+    private = {true},
+    video = {},
+}
