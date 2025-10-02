@@ -52,16 +52,24 @@ def get_author_dict():
         'Michael Niemeyer': 'https://m-niemeyer.github.io/',
         }
 
-def generate_person_html(persons, connection=", ", make_bold=True, make_bold_name='Atakan Topaloglu', add_links=True):
+def generate_person_html(persons, connection=", ", make_bold=True, make_bold_name='Atakan Topaloglu', add_links=True, equal_contribution_n=0):
     links = get_author_dict() if add_links else {}
     s = ""
-    for p in persons:
+    for i, p in enumerate(persons):
         name_parts = p.get_part('first') + p.get_part('middle') + p.get_part('last')
-        string_part_i = " ".join(name_parts)
-        if string_part_i in links.keys():
-            string_part_i = f'<a href="{links[string_part_i]}" target="_blank">{string_part_i}</a>'
-        if make_bold and string_part_i == make_bold_name:
-            string_part_i = f'<span style="font-weight: bold";>{make_bold_name}</span>'
+        raw_name = " ".join(name_parts)
+        
+        star = ""
+        if equal_contribution_n > 0 and i < equal_contribution_n:
+            star = "*"
+            
+        display_name = raw_name
+        if raw_name in links.keys():
+            display_name = f'<a href="{links[raw_name]}" target="_blank">{raw_name}</a>'
+        if make_bold and raw_name == make_bold_name:
+            display_name = f'<span style="font-weight: bold";>{raw_name}</span>'
+            
+        string_part_i = display_name + star
         if p != persons[-1]:
             string_part_i += connection
         s += string_part_i
@@ -91,7 +99,14 @@ def get_paper_entry(entry_key, entry):
     else:
         s += f"""<b><a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a></b> <br>"""
 
-    s += f"""{generate_person_html(entry.persons['author'])} <br>"""
+    equal_contribution_n = 0
+    if 'equal_contribution' in entry.fields:
+        try:
+            equal_contribution_n = int(entry.fields['equal_contribution'])
+        except ValueError:
+            print(f"[{entry_key}] Warning: equal_contribution field must be an integer.")
+
+    s += f"""{generate_person_html(entry.persons['author'], equal_contribution_n=equal_contribution_n)} <br>"""
     s += f"""<span style="font-style: italic;">{entry.fields['booktitle']}</span>, {entry.fields['year']} <br>"""
 
     artefacts = {'html': 'Project Page', 'pdf': 'Paper', 'supp': 'Supplemental', 'video': 'Video', 'poster': 'Poster', 'code': 'Code'}
@@ -139,8 +154,14 @@ def get_publications_html():
     bib_data = parser.parse_file('publication_list.bib')
     keys = bib_data.entries.keys()
     s = ""
+    has_equal_contribution = False
     for k in keys:
+        entry = bib_data.entries[k]
+        if 'equal_contribution' in entry.fields:
+            has_equal_contribution = True
         s+= get_paper_entry(k, bib_data.entries[k])
+    if has_equal_contribution:
+        s += '<p style="font-size: 0.9em; margin-top: 0.5em; color: #636363;">* denotes equal contribution</p>'
     return s
 
 def get_talks_html():
