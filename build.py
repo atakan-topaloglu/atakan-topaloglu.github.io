@@ -77,7 +77,7 @@ def generate_person_html(persons, connection=", ", make_bold=True, make_bold_nam
     return s
 
 def get_paper_entry(entry_key, entry):
-    s = """<div style="margin-bottom: 1.5em;"> <div class="row"><div class="col-sm-3">"""
+    s = """<div style="margin-bottom: 1.5em;"> <div class="row"><div class="col-12 col-sm-3 text-center">"""
     
     # Determine the link for the image based on priority: html -> video -> pdf
     image_link = None
@@ -89,11 +89,11 @@ def get_paper_entry(entry_key, entry):
         image_link = entry.fields['pdf']
     
     if image_link:
-        s += f"""<a href="{image_link}" target="_blank"><img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image"></a>"""
+        s += f"""<a href="{image_link}" target="_blank"><img src="{entry.fields['img']}" class="img-fluid img-thumbnail mx-auto d-block" style="max-width: 200px;" alt="Project image"></a>"""
     else:
-        s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image">"""
+        s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail mx-auto d-block" style="max-width: 200px;" alt="Project image">"""
     
-    s += """</div><div class="col-sm-9">"""
+    s += """</div><div class="col-12 col-sm-9">"""
 
     if 'award' in entry.fields.keys():
         s += f"""<b><a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <span style="color: red;">({entry.fields['award']})</span></b><br>"""
@@ -131,9 +131,9 @@ def get_paper_entry(entry_key, entry):
     return s
 
 def get_talk_entry(entry_key, entry):
-    s = """<div style="margin-bottom: 1.5em;"> <div class="row"><div class="col-sm-3">"""
-    s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image">"""
-    s += """</div><div class="col-sm-9">"""
+    s = """<div style="margin-bottom: 1.5em;"> <div class="row"><div class="col-12 col-sm-3 text-center">"""
+    s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail mx-auto d-block" style="max-width: 200px;" alt="Project image">"""
+    s += """</div><div class="col-12 col-sm-9">"""
     s += f"""{entry.fields['title']}<br>"""
     s += f"""<span style="font-style: italic;">{entry.fields['booktitle']}</span>, {entry.fields['year']} <br>"""
 
@@ -183,7 +183,7 @@ def get_talks_html():
 # --- Project handling modified to use projects.bib ---
 
 def get_project_entry(entry_key, entry):
-    s = """<div style="margin-bottom: 1.5em;"> <div class="row"><div class="col-sm-3">"""
+    s = """<div style="margin-bottom: 1.5em;"> <div class="row"><div class="col-12 col-sm-3 text-center">"""
     
     # Map fields from BibTeX entry
     title = entry.fields.get('title', 'Untitled Project')
@@ -201,11 +201,11 @@ def get_project_entry(entry_key, entry):
         thumbnail_link = thumbnail_link or video_url
     
     if thumbnail_link:
-        s += f"""<a href="{thumbnail_link}" target="_blank"><img src="{img_src}" class="img-fluid img-thumbnail" alt="Project image"></a>"""
+        s += f"""<a href="{thumbnail_link}" target="_blank"><img src="{img_src}" class="img-fluid img-thumbnail mx-auto d-block" style="max-width: 200px;" alt="Project image"></a>"""
     else:
-        s += f"""<img src="{img_src}" class="img-fluid img-thumbnail" alt="Project image">"""
+        s += f"""<img src="{img_src}" class="img-fluid img-thumbnail mx-auto d-block" style="max-width: 200px;" alt="Project image">"""
 
-    s += """</div><div class="col-sm-9">"""
+    s += """</div><div class="col-12 col-sm-9">"""
     s += f"""<p style="font-weight: bold; margin-bottom: 0.5em;">{title}</p>"""
     s += f"""<div>{description}</div>"""
     
@@ -278,11 +278,13 @@ def get_index_html():
                     <p style="text-align: center; font-size: 0.8rem; color: #6c757d; margin-top: -10px;">(AH-tah-kahn TOH-pah-loh-loo)</p>
                     </div>
                     <br>
-                    <div class="col-md-10" style="">
-                        {bio_text}
+                    <!-- Profile Image appears first on mobile (col-12), but second on desktop (order-md-2) -->
+                   <div class="col-12 col-md-2 text-center order-md-2" style="margin-bottom: 1em;">
+                        <img src="assets/img/profile.jpg" class="img-thumbnail mx-auto d-block" style="max-width: 200px; width: 100%;" alt="Profile picture">
                     </div>
-                    <div class="col-md-2" style="">
-                        <img src="assets/img/profile.jpg" class="img-thumbnail" width="280px" alt="Profile picture">
+                    <!-- Bio Text appears second on mobile (col-12), but first on desktop (order-md-1) -->
+                    <div class="col-12 col-md-10 order-md-1" style="">
+                        {bio_text}
                     </div>
                 </div>
                 
@@ -327,7 +329,6 @@ def get_index_html():
                     </div>
                 </div>
             </div>
-            <div class="col-md-1"></div>
         </div>
     </div>
 
