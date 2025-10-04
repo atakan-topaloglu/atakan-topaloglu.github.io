@@ -80,11 +80,11 @@ def get_paper_entry(entry_key, entry):
     
     # Determine the link for the image based on priority: html -> video -> pdf
     image_link = None
-    if 'html' in entry.fields.keys():
+    if 'html' in entry.fields and entry.fields['html'].strip():
         image_link = entry.fields['html']
-    elif 'video' in entry.fields.keys():
-        image_link = entry.fields['video']
-    elif 'pdf' in entry.fields.keys():
+    elif 'arxiv' in entry.fields and entry.fields['arxiv'].strip():
+        image_link = entry.fields['arxiv']
+    elif 'pdf' in entry.fields and entry.fields['pdf'].strip():
         image_link = entry.fields['pdf']
     
     if image_link:
@@ -94,10 +94,20 @@ def get_paper_entry(entry_key, entry):
     
     s += """</div><div class="col-sm-9">"""
 
+
+    title_link = image_link
+
     if 'award' in entry.fields.keys():
-        s += f"""<b><a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <span style="color: red;">({entry.fields['award']})</span></b><br>"""
+        if title_link:
+            s += f"""<b><a href="{title_link}" target="_blank">{entry.fields['title']}</a> <span style="color: red;">({entry.fields['award']})</span></b><br>"""
+        else:
+            s += f"""<b>{entry.fields['title']} <span style="color: red;">({entry.fields['award']})</span></b><br>"""
     else:
-        s += f"""<b><a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a></b> <br>"""
+        if title_link:
+            s += f"""<b><a href="{title_link}" target="_blank">{entry.fields['title']}</a></b> <br>"""
+        else:
+            s += f"""<b>{entry.fields['title']}</b> <br>"""
+
 
     equal_contribution_n = 0
     if 'equal_contribution' in entry.fields:
@@ -109,7 +119,7 @@ def get_paper_entry(entry_key, entry):
     s += f"""{generate_person_html(entry.persons['author'], equal_contribution_n=equal_contribution_n)} <br>"""
     s += f"""<span style="font-style: italic;">{entry.fields['booktitle']}</span>, {entry.fields['year']} <br>"""
 
-    artefacts = {'html': 'Project Page', 'pdf': 'Paper', 'supp': 'Supplemental', 'video': 'Video', 'poster': 'Poster', 'code': 'Code'}
+    artefacts = {'html': 'Project Page', 'pdf': 'Paper', 'supp': 'Supplementary', 'video': 'Video', 'poster': 'Poster', 'code': 'Code'}
     i = 0
 
     artefacts = {k: v for k, v in artefacts.items() if entry.fields.get(k) != ''}
@@ -283,7 +293,7 @@ def get_index_html():
                     <div class="col-md-10" style="">
                         {bio_text}
                     </div>
-                    <div class="col-md-2" style="">
+                    <div class="col-md-2 text-center text-md-right">
                         <img src="assets/img/profile.jpg" class="img-thumbnail" width="280px" alt="Profile picture">
                     </div>
                 </div>
