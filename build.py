@@ -112,6 +112,9 @@ def get_paper_entry(entry_key, entry):
 
     artefacts = {'html': 'Project Page', 'pdf': 'Paper', 'supp': 'Supplemental', 'video': 'Video', 'poster': 'Poster', 'code': 'Code'}
     i = 0
+
+    artefacts = {k: v for k, v in artefacts.items() if entry.fields.get(k) != ''}
+
     for (k, v) in artefacts.items():
         if k in entry.fields.keys():
             if i > 0:
