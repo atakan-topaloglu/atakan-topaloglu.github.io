@@ -15,7 +15,7 @@ def get_personal_data():
     I completed my BSc at 
     <a href="https://en.wikipedia.org/wiki/Ko%C3%A7_University" target="_blank">Koç University</a> and studied at 
     <a href="https://website.robcol.k12.tr/en/about-rc" target="_blank">Robert College</a> in Istanbul. 
-    During my undergraduate studies, I spent three years at Siemens, where I contributed to projects alongside highly talented colleagues as an R&D Working Student.
+    During my undergraduate studies, I spent three years at Siemens alongside highly talented colleagues as an R&D Working Student.
 </p>
                 <p>For any inquiries, feel free to reach out to me via mail!</p>
                 <p>
@@ -312,7 +312,7 @@ def get_index_html():
                 <hr style="border: none; border-top: 1px solid #eaeaea; margin: 1em 0; opacity: 0.3;">
                  <div class="row" style="margin-top: 1.5em;">
                      <div class="col-sm-12" style="">
-                     <h4>💻 Projects</h4>
+                     <h4>💻 Selected Projects from Siemens R&D</h4>
                         {projects}
                     </div>
                 </div>"""
