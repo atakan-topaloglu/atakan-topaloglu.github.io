@@ -288,7 +288,6 @@ def get_index_html():
                 <div class="row" style="margin-top: 1.5em;">
                     <div class="col-sm-12" style="margin-bottom: 0em;">
                     <h3 class="display-4" style="text-align: center; margin-bottom: 0.3em;"><span style="font-weight: bold;">{name[0]}</span> {name[1]}</h3>
-                    <p style="text-align: center; font-size: 0.8rem; color: #6c757d; margin-top: -10px;">(AH-tah-kahn TOH-pah-loh-loo)</p>
                     </div>
                     <br>
                     <div class="col-md-10" style="">
