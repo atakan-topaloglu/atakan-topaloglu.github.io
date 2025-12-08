@@ -2,6 +2,7 @@ from pybtex.database.input import bibtex
 import urllib.parse
 import json
 import os
+from datetime import datetime
 
 def get_personal_data():
     name = ["Atakan", "Topaloğlu"]
@@ -84,6 +85,49 @@ def get_site_meta():
             "sameAs": same_as,
         },
     }
+
+
+def write_sitemap(filename='sitemap.xml'):
+    meta = get_site_meta()
+    base_url = meta["url"].rstrip("/") + "/"
+    pages = [base_url]
+
+    # Add resume PDF if present to encourage discovery in name queries
+    resume_path = os.path.join("assets", "pdf", "Atakan_Topaloglu_Resume.pdf")
+    if os.path.exists(resume_path):
+        pages.append(urllib.parse.urljoin(base_url, resume_path))
+
+    lastmod = datetime.utcnow().date().isoformat()
+    urls_xml = "\n".join(
+        [
+            "  <url>\n"
+            f"    <loc>{p}</loc>\n"
+            f"    <lastmod>{lastmod}</lastmod>\n"
+            "  </url>"
+            for p in pages
+        ]
+    )
+    sitemap = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f"{urls_xml}\n"
+        "</urlset>\n"
+    )
+    with open(filename, "w") as f:
+        f.write(sitemap)
+    print(f"Written sitemap to {filename}.")
+
+
+def write_robots_txt(filename='robots.txt'):
+    meta = get_site_meta()
+    sitemap_url = urllib.parse.urljoin(meta["url"].rstrip("/") + "/", "sitemap.xml")
+    content = f"""User-agent: *
+Allow: /
+Sitemap: {sitemap_url}
+"""
+    with open(filename, "w") as f:
+        f.write(content)
+    print(f"Written robots.txt to {filename}.")
 
 def get_author_dict():
     return {
@@ -439,3 +483,5 @@ def write_index_html(filename='index.html'):
 
 if __name__ == '__main__':
     write_index_html('index.html')
+    write_sitemap('sitemap.xml')
+    write_robots_txt('robots.txt')
