@@ -1,5 +1,6 @@
 from pybtex.database.input import bibtex
 import urllib.parse
+import json
 import os
 
 def get_personal_data():
@@ -41,6 +42,49 @@ def get_personal_data():
       """
     return name, bio_text, footer
 
+
+def get_site_meta():
+    base_url = "https://atakan-topaloglu.github.io/"
+    profile_image = urllib.parse.urljoin(base_url, "assets/img/profile.jpg")
+    same_as = [
+        "https://scholar.google.com/citations?user=l9mFndIAAAAJ&hl=en",
+        "https://github.com/atakan-topaloglu",
+        "https://www.linkedin.com/in/atakan-topaloglu",
+        "mailto:atopaloglu@ethz.ch",
+    ]
+    return {
+        "title": "Atakan Topaloğlu | 3D Scene Understanding Researcher",
+        "description": (
+            "Atakan Topaloğlu — MSc Electrical Engineering student at ETH Zürich "
+            "researching 3D scene understanding, visual representation learning, "
+            "Gaussian Splatting, and computer vision."
+        ),
+        "url": base_url,
+        "image": profile_image,
+        "author": "Atakan Topaloğlu",
+        "keywords": (
+            "Atakan Topaloglu, Atakan Topaloğlu, ETH Zürich, ETH Zurich, 3D scene understanding, "
+            "Gaussian Splatting, computer vision researcher, visual representation learning"
+        ),
+        "same_as": same_as,
+        "structured_data": {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Atakan Topaloğlu",
+            "alternateName": "Atakan Topaloglu",
+            "url": base_url,
+            "image": profile_image,
+            "jobTitle": "MSc Student, ETH Zürich — 3D Scene Understanding & Visual Representation Learning",
+            "affiliation": {
+                "@type": "CollegeOrUniversity",
+                "name": "ETH Zürich",
+                "url": "https://ethz.ch/en.html",
+            },
+            "email": "mailto:atopaloglu@ethz.ch",
+            "sameAs": same_as,
+        },
+    }
+
 def get_author_dict():
     return {
         'A. Murat Tekalp': 'https://scholar.google.com.tr/citations?user=GzwcDjUAAAAJ&hl=en',
@@ -78,6 +122,7 @@ def generate_person_html(persons, connection=", ", make_bold=True, make_bold_nam
 
 def get_paper_entry(entry_key, entry):
     s = """<div style="margin-bottom: 1.5em;"> <div class="row"><div class="col-sm-3">"""
+    title_text = entry.fields.get('title', 'Research project')
     
     # Determine the link for the image based on priority: html -> video -> pdf
     image_link = None
@@ -89,9 +134,9 @@ def get_paper_entry(entry_key, entry):
         image_link = entry.fields['pdf']
     
     if image_link:
-        s += f"""<a href="{image_link}" target="_blank"><img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image"></a>"""
+        s += f"""<a href="{image_link}" target="_blank"><img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Thumbnail for {title_text}" loading="lazy" decoding="async"></a>"""
     else:
-        s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image">"""
+        s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Thumbnail for {title_text}" loading="lazy" decoding="async">"""
     
     s += """</div><div class="col-sm-9">"""
 
@@ -145,7 +190,8 @@ def get_paper_entry(entry_key, entry):
 
 def get_talk_entry(entry_key, entry):
     s = """<div style="margin-bottom: 1.5em;"> <div class="row"><div class="col-sm-3">"""
-    s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image">"""
+    img_alt = f"Thumbnail for {entry.fields.get('title', 'Talk')}"
+    s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="{img_alt}" loading="lazy" decoding="async">"""
     s += """</div><div class="col-sm-9">"""
     s += f"""{entry.fields['title']}<br>"""
     s += f"""<span style="font-style: italic;">{entry.fields['booktitle']}</span>, {entry.fields['year']} <br>"""
@@ -214,9 +260,9 @@ def get_project_entry(entry_key, entry):
         thumbnail_link = thumbnail_link or video_url
     
     if thumbnail_link:
-        s += f"""<a href="{thumbnail_link}" target="_blank"><img src="{img_src}" class="img-fluid img-thumbnail" alt="Project image"></a>"""
+        s += f"""<a href="{thumbnail_link}" target="_blank"><img src="{img_src}" class="img-fluid img-thumbnail" alt="Thumbnail for {title}" loading="lazy" decoding="async"></a>"""
     else:
-        s += f"""<img src="{img_src}" class="img-fluid img-thumbnail" alt="Project image">"""
+        s += f"""<img src="{img_src}" class="img-fluid img-thumbnail" alt="Thumbnail for {title}" loading="lazy" decoding="async">"""
 
     s += """</div><div class="col-sm-9">"""
     s += f"""<p style="font-weight: bold; margin-bottom: 0.5em;">{title}</p>"""
@@ -262,6 +308,8 @@ def get_index_html():
     talks = get_talks_html()
     name, bio_text, footer = get_personal_data()
     projects = get_projects_html()
+    meta = get_site_meta()
+    structured_data = json.dumps(meta["structured_data"], ensure_ascii=False, indent=2)
     s = f"""
     <!doctype html>
 <html lang="en">
@@ -270,13 +318,35 @@ def get_index_html():
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="{meta['description']}">
+  <meta name="author" content="{meta['author']}">
+  <meta name="keywords" content="{meta['keywords']}">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{meta['url']}">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="{meta['title']}">
+  <meta property="og:description" content="{meta['description']}">
+  <meta property="og:url" content="{meta['url']}">
+  <meta property="og:image" content="{meta['image']}">
+  <meta property="og:site_name" content="{meta['title']}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{meta['title']}">
+  <meta name="twitter:description" content="{meta['description']}">
+  <meta name="twitter:image" content="{meta['image']}">
+
+  <script type="application/ld+json">
+{structured_data}
+  </script>
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <title>{name[0] + ' ' + name[1]}</title>
+  <title>{meta['title']}</title>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico?v=5">
 </head>
 
@@ -287,14 +357,15 @@ def get_index_html():
             <div class="col-md-10">
                 <div class="row" style="margin-top: 1.5em;">
                     <div class="col-sm-12" style="margin-bottom: 0em;">
-                    <h3 class="display-4" style="text-align: center; margin-bottom: 0.3em;"><span style="font-weight: bold;">{name[0]}</span> {name[1]}</h3>
+                    <h1 class="display-4" style="text-align: center; margin-bottom: 0.3em;"><span style="font-weight: bold;">{name[0]}</span> {name[1]}</h1>
+                    <p style="text-align: center; font-size: 0.8rem; color: #6c757d; margin-top: -10px;">(AH-tah-kahn TOH-pah-loh-loo)</p>
                     </div>
                     <br>
                     <div class="col-md-10" style="">
                         {bio_text}
                     </div>
                     <div class="col-md-2 text-center text-md-right">
-                        <img src="assets/img/profile.jpg" class="img-thumbnail" width="280px" alt="Profile picture">
+                        <img src="assets/img/profile.jpg" class="img-thumbnail" width="280px" alt="Portrait of Atakan Topaloğlu" loading="lazy" decoding="async">
                     </div>
                 </div>
                 
