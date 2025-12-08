@@ -358,7 +358,6 @@ def get_index_html():
                 <div class="row" style="margin-top: 1.5em;">
                     <div class="col-sm-12" style="margin-bottom: 0em;">
                     <h1 class="display-4" style="text-align: center; margin-bottom: 0.3em;"><span style="font-weight: bold;">{name[0]}</span> {name[1]}</h1>
-                    <p style="text-align: center; font-size: 0.8rem; color: #6c757d; margin-top: -10px;">(AH-tah-kahn TOH-pah-loh-loo)</p>
                     </div>
                     <br>
                     <div class="col-md-10" style="">
@@ -373,7 +372,7 @@ def get_index_html():
 
                 <div class="row" style="margin-top: 1em;">
                     <div class="col-sm-12" style="">
-                        <h4>📚 Publications</h4>
+                        <h4>Publications</h4>
                         {pub}
                     </div>
                 </div>"""
@@ -382,7 +381,7 @@ def get_index_html():
                 <hr style="border: none; border-top: 1px solid #eaeaea; margin: 1em 0; opacity: 0.3;">
                  <div class="row" style="margin-top: 1.5em;">
                      <div class="col-sm-12" style="">
-                     <h4>💻 Selected Projects from Siemens R&D</h4>
+                     <h4>Selected Projects from Siemens R&D</h4>
                         {projects}
                     </div>
                 </div>"""
