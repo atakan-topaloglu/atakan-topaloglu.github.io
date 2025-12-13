@@ -391,7 +391,13 @@ def get_index_html():
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <title>{meta['title']}</title>
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico?v=5">
+  <!-- Favicons for Google Search and browsers -->
+  <link rel="icon" type="image/x-icon" href="{meta['url']}favicon.ico">
+  <link rel="icon" type="image/x-icon" href="{meta['url']}assets/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="{meta['url']}assets/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="{meta['url']}assets/favicon.ico">
+  <link rel="shortcut icon" href="{meta['url']}favicon.ico">
+  <link rel="apple-touch-icon" href="{meta['url']}assets/favicon.ico">
 </head>
 
 <body>
@@ -481,7 +487,22 @@ def write_index_html(filename='index.html'):
         f.write(s)
     print(f'Written index content to {filename}.')
 
+
+def copy_favicon_to_root():
+    """Copy favicon to root directory for better Google indexing."""
+    import shutil
+    favicon_source = os.path.join('assets', 'favicon.ico')
+    favicon_dest = 'favicon.ico'
+    
+    if os.path.exists(favicon_source):
+        shutil.copy2(favicon_source, favicon_dest)
+        print(f'Copied favicon to root directory ({favicon_dest}).')
+    else:
+        print(f'Warning: {favicon_source} not found. Skipping favicon copy.')
+
+
 if __name__ == '__main__':
     write_index_html('index.html')
     write_sitemap('sitemap.xml')
     write_robots_txt('robots.txt')
+    copy_favicon_to_root()
