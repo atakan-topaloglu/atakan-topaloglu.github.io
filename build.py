@@ -189,7 +189,7 @@ def get_paper_entry(entry_key, entry):
 
     if 'award' in entry.fields.keys():
         if title_link:
-            s += f"""<b><a href="{title_link}" target="_blank">{entry.fields['title']}</a> <span style="color: red;">({entry.fields['award']})</span></b><br>"""
+            s += f"""<b><a href="{title_link}" target="_blank">{entry.fields['title']}</a></b><br><span style="color: red; font-weight: bold;">({entry.fields['award']})</span><br>"""
         else:
             s += f"""<b>{entry.fields['title']} <span style="color: red;">({entry.fields['award']})</span></b><br>"""
     else:
