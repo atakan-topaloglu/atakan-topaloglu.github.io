@@ -11,8 +11,7 @@ def get_personal_data():
     linkedin = "atakan-topaloglu"
     bio_text = f"""
              <p>
-    I'm a first-year MSc student in Electrical Engineering and Information Technology at <b>ETH Zürich</b>, specializing in <b>3D Perception and High Performance Computing</b>. I work as a <b>Research Assistant</b> in the 
-    <a href="https://prs.igp.ethz.ch/" target="_blank"><b>Photogrammetry and Remote Sensing Lab</b></a>, supervised by Prof. Konrad Schindler. <br>
+    I'm a first-year MSc student in Electrical Engineering and Information Technology at <b>ETH Zürich</b>, specializing in <b>3D Perception and High Performance Computing</b>.
     <br>
     I completed my BSc at 
     <a href="https://en.wikipedia.org/wiki/Ko%C3%A7_University" target="_blank">Koç University</a> and studied at 
