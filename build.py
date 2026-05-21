@@ -11,12 +11,12 @@ def get_personal_data():
     linkedin = "atakan-topaloglu"
     bio_text = f"""
              <p>
-    I'm a first-year MSc student in Electrical Engineering and Information Technology at <b>ETH Zürich</b>, specializing in <b>3D Perception and High Performance Computing</b>.
+    I'm a first-year MSc student in Electrical Engineering and Information Technology at <b>ETH Zürich</b>, and a AI Engineer Intern at <b>Flexion Robotics</b>.
     <br>
     I completed my BSc at 
     <a href="https://en.wikipedia.org/wiki/Ko%C3%A7_University" target="_blank">Koç University</a> and studied at 
     <a href="https://website.robcol.k12.tr/en/about-rc" target="_blank">Robert College</a> in Istanbul. 
-    During my undergraduate studies, I spent three years at Siemens alongside highly talented colleagues as an R&D Working Student.
+    Spent three years as an R&D Working Student at Siemens during my undergraduate studies, collaborating with a fantastic team.
 </p>
                 <p>For any inquiries, feel free to reach out to me via mail!</p>
                 <p>
