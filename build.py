@@ -11,7 +11,7 @@ def get_personal_data():
     linkedin = "atakan-topaloglu"
     bio_text = f"""
              <p>
-    I'm a first-year MSc student in Electrical Engineering and Information Technology at <b>ETH Zürich</b>, and a AI Engineer Intern at <b>Flexion Robotics</b>.
+    I'm a second-year MSc student in Electrical Engineering and Information Technology at <b>ETH Zürich</b>, and a AI Engineer Intern at <b>Flexion Robotics</b>.
     <br>
     I completed my BSc at 
     <a href="https://en.wikipedia.org/wiki/Ko%C3%A7_University" target="_blank">Koç University</a> and studied at 
@@ -222,10 +222,10 @@ def get_paper_entry(entry_key, entry):
         else:
             print(f'[{entry_key}] Warning: Field {k} missing!')
 
-    cite = "<pre><code>@InProceedings{" + f"{entry_key}, \n"
-    cite += "\tauthor = {" + f"{generate_person_html(entry.persons['author'], make_bold=False, add_links=False, connection=' and ')}" + "}, \n"
+    cite = "<pre><code>@InProceedings{" + f"{entry_key},\n"
+    cite += "\tauthor = {" + f"{generate_person_html(entry.persons['author'], make_bold=False, add_links=False, connection=' and ')}" + "},\n"
     for entr in ['title', 'booktitle', 'year']:
-        cite += f"\t{entr} = " + "{" + f"{entry.fields[entr]}" + "}, \n"
+        cite += f"\t{entr} = " + "{" + f"{entry.fields[entr]}" + "},\n"
     cite += """}</pre></code>"""
     s += " /" + f"""<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{entry_key}" aria-expanded="false" aria-controls="collapseExample" style="margin-left: -6px; margin-top: -2px;">Expand bibtex</button><div class="collapse" id="collapse{entry_key}"><div class="card card-body">{cite}</div></div>"""
     s += """ </div> </div> </div>"""
@@ -285,13 +285,13 @@ def get_talks_html():
 # --- Project handling modified to use projects.bib ---
 
 def get_project_entry(entry_key, entry):
-    s = """<div style="margin-bottom: 1.5em;"> <div class="row"><div class="col-sm-3">"""
+    s = """<div style="margin-bottom: 1.5em;"> <div class="row">"""
     
     # Map fields from BibTeX entry
     title = entry.fields.get('title', 'Untitled Project')
     # Assuming 'description' is a custom field in projects.bib for project summary
     description = entry.fields.get('description', 'No description provided.')
-    img_src = entry.fields.get('img', 'assets/img/default.png') 
+    img_src = entry.fields.get('img')
     video_url = entry.fields.get('video')
     website_url = entry.fields.get('html')
     # Check if the project is marked as private (e.g., private={1} or private={true})
@@ -302,12 +302,15 @@ def get_project_entry(entry_key, entry):
     if not is_private:
         thumbnail_link = thumbnail_link or video_url
     
-    if thumbnail_link:
-        s += f"""<a href="{thumbnail_link}" target="_blank"><img src="{img_src}" class="img-fluid img-thumbnail" alt="Thumbnail for {title}" loading="lazy" decoding="async"></a>"""
-    else:
-        s += f"""<img src="{img_src}" class="img-fluid img-thumbnail" alt="Thumbnail for {title}" loading="lazy" decoding="async">"""
+    if img_src:
+        s += """<div class="col-sm-3">"""
+        if thumbnail_link:
+            s += f"""<a href="{thumbnail_link}" target="_blank"><img src="{img_src}" class="img-fluid img-thumbnail" alt="Thumbnail for {title}" loading="lazy" decoding="async"></a>"""
+        else:
+            s += f"""<img src="{img_src}" class="img-fluid img-thumbnail" alt="Thumbnail for {title}" loading="lazy" decoding="async">"""
+        s += """</div>"""
 
-    s += """</div><div class="col-sm-9">"""
+    s += '<div class="col-sm-9">' if img_src else '<div class="col-sm-12">'
     s += f"""<p style="font-weight: bold; margin-bottom: 0.5em;">{title}</p>"""
     s += f"""<div>{description}</div>"""
     
@@ -430,7 +433,7 @@ def get_index_html():
                 <hr style="border: none; border-top: 1px solid #eaeaea; margin: 1em 0; opacity: 0.3;">
                  <div class="row" style="margin-top: 1.5em;">
                      <div class="col-sm-12" style="">
-                     <h4>Selected Projects from Siemens R&D</h4>
+                     <h4>Selected Projects</h4>
                         {projects}
                     </div>
                 </div>"""
